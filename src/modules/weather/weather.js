@@ -1,22 +1,22 @@
 const API_KEY = '29a9417254736a0b3b8ae55f381aa16a';
-import { getLocation } from './getlocation.js'
+import { getLocation, getCityName } from './getlocation.js'
 import { capitalizeText } from '../../utils/capitalizeText.js';
 
 const weatherElement = document.querySelector('#temperature');
 const descriptionElement = document.querySelector('#description');
 const iconElement = document.querySelector('#icon');
+const cityElement = document.querySelector('#city');
 
-async function getWeather( { lat, lon } ) {
+async function getWeather( { city } ) {
 
     try {
-        const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=pt_br`);
-        const response = await data.json();
-        console.log(response);
-      
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=pt_br`);
+        const data = await response.json();
+              
         return {
-            temperature: Math.round(response.main.temp),
-            description: response.weather[0].description,
-            icon: response.weather[0].icon
+            temperature: Math.round(data.main.temp),
+            description: data.weather[0].description,
+            icon: data.weather[0].icon
         }
 
     } catch (error) {
@@ -28,13 +28,16 @@ async function getWeather( { lat, lon } ) {
 export async function renderWeather() {
     
     const location = await getLocation();
-    
+    const cityName = await getCityName(location.lat, location.lon);
+
     const weather = await getWeather  ({
-        lat: location.lat,
-        lon: location.lon
+        city: cityName
     });
 
     weatherElement.textContent = `${weather.temperature}°`;
     descriptionElement.textContent = capitalizeText(weather.description);
     iconElement.src = `https://openweathermap.org/img/wn/${weather.icon}@4x.png`;
+    cityElement.textContent = cityName;
+  
 }  
+
