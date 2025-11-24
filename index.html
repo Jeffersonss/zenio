@@ -1,13 +1,33 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zenio</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+  <title>Zenio</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <session class="wrapper__head">
+      <p class="wrapper__head--city"> Brasília </p>
+      <h1 class="wrapper__head--time" id="time"></h1>
+      <time class="wrapper__head--date" id="date">  </time>
+    </session>
+    <session class="wrapper__body">
+      <div class="wrapper__body--container">
+        <div class="wrapper__body--info">
+          <p class="wrapper__body--temperature" id="temperature"></p>
+          <p class="wrapper__body--desc" id="description"></p>
+        </div>
+        <img class="wrapper__body--icon" src="" alt="" id="icon" />
+      </div>
+    </session>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
